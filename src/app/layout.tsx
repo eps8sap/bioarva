@@ -48,7 +48,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${inter.variable} ${jetbrains.variable} antialiased bg-bone-white text-soil-dark`}
       >
         <Navbar />
-        <main className="pt-16 md:pt-20">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
