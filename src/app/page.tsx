@@ -1,59 +1,47 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ui/ScrollReveal";
-import {
-  SeedIcon,
-  WormIcon,
-  SoilIcon,
-  CompostIcon,
-  ToolsIcon,
-  LearnIcon,
-  ArrowRightIcon,
-  CheckIcon,
-  CalculatorIcon,
-  CalendarIcon,
-  FlaskIcon,
-  MicroscopeIcon,
-} from "@/components/ui/Icons";
+import { ArrowRightIcon, CheckIcon } from "@/components/ui/Icons";
 
 const categories = [
   {
     name: "Seeds",
     description: "Heirloom organic seeds",
     href: "/shop/seeds",
-    Icon: SeedIcon,
+    icon: "/icons/seed.png",
   },
   {
     name: "Worms & Biology",
     description: "Living soil organisms",
     href: "/shop/live-organisms",
-    Icon: WormIcon,
+    icon: "/icons/worm.png",
   },
   {
     name: "Soil Amendments",
     description: "Build living soil",
     href: "/shop/soil-amendments",
-    Icon: SoilIcon,
+    icon: "/icons/soil-layers.png",
   },
   {
     name: "Composting",
     description: "Systems & equipment",
     href: "/shop/composting",
-    Icon: CompostIcon,
+    icon: "/icons/compost.png",
   },
   {
     name: "Tools & Tech",
     description: "Test, grow, harvest",
     href: "/shop/tools",
-    Icon: ToolsIcon,
+    icon: "/icons/tools.png",
   },
   {
     name: "Learn",
     description: "Soil science guides",
     href: "/learn",
-    Icon: LearnIcon,
+    icon: "/icons/book-plant.png",
   },
 ];
 
@@ -62,16 +50,19 @@ const brassicaCollections = [
     name: "Complete Kale Collection",
     description: "25+ heirloom kale varieties from around the world",
     href: "/shop/collections",
+    icon: "/icons/kale.png",
   },
   {
     name: "Heritage Cabbage Set",
     description: "Savoy, red, green, and napa varieties",
     href: "/shop/collections",
+    icon: "/icons/cabbage.png",
   },
   {
     name: "Asian Brassica Explorer",
     description: "Bok choy, mizuna, tatsoi, gai lan",
     href: "/shop/collections",
+    icon: "/icons/bok-choy.png",
   },
 ];
 
@@ -80,21 +71,25 @@ const healthTopics = [
     title: "Sulforaphane",
     description: "The most powerful cancer-fighting compound in food",
     href: "/learn/health-healing",
+    icon: "/icons/molecule-leaf.png",
   },
   {
     title: "Gut Health",
     description: "Prebiotic fiber and fermentation benefits",
     href: "/learn/health-healing",
+    icon: "/icons/flask-plant.png",
   },
   {
     title: "Anti-Inflammatory",
     description: "Reduce systemic inflammation naturally",
     href: "/learn/health-healing",
+    icon: "/icons/broccoli.png",
   },
   {
     title: "Detoxification",
     description: "Support your body's natural cleansing",
     href: "/learn/health-healing",
+    icon: "/icons/cauliflower.png",
   },
 ];
 
@@ -102,25 +97,25 @@ const calculators = [
   {
     title: "Planting Calculator",
     description: "Garden dimensions + zone → shopping list",
-    Icon: CalculatorIcon,
+    icon: "/icons/planner-grid.png",
     href: "/tools/planting-calculator",
   },
   {
     title: "Seasonal Planner",
     description: "Zone-specific planting calendar",
-    Icon: CalendarIcon,
+    icon: "/icons/calendar-seedling.png",
     href: "/tools/seasonal-planner",
   },
   {
     title: "Soil Health Quiz",
     description: "Is your soil alive? Get your score",
-    Icon: FlaskIcon,
+    icon: "/icons/microscope.png",
     href: "/tools/soil-health-quiz",
   },
   {
     title: "Compost Recipe Builder",
     description: "Calculate your C:N ratio",
-    Icon: MicroscopeIcon,
+    icon: "/icons/compost.png",
     href: "/tools/compost-recipe-builder",
   },
 ];
@@ -141,6 +136,14 @@ const consultingServices = [
     description: "Farm and garden restoration plans",
     href: "/consulting/regenerative-consulting",
   },
+];
+
+const ecosystemItems = [
+  { name: "Seeds", icon: "/icons/seed.png", href: "/shop/seeds" },
+  { name: "Living Soil", icon: "/icons/soil-layers.png", href: "/learn/soil-food-web" },
+  { name: "Composting", icon: "/icons/compost.png", href: "/shop/composting" },
+  { name: "Testing", icon: "/icons/microscope.png", href: "/shop/tools/soil-testing" },
+  { name: "Tools", icon: "/icons/tools.png", href: "/shop/tools" },
 ];
 
 export default function Home() {
@@ -229,7 +232,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Section 2: Category Navigation - No borders, shadows only */}
+      {/* Section 2: Category Navigation - Gold Medallion Icons */}
       <section className="py-24 md:py-32 bg-bone-white">
         <div className="max-w-7xl mx-auto px-4">
           <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" staggerDelay={0.08}>
@@ -237,9 +240,16 @@ export default function Home() {
               <StaggerItem key={category.name}>
                 <Link
                   href={category.href}
-                  className="group block p-8 bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  className="group block p-6 bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 text-center"
                 >
-                  <category.Icon className="w-8 h-8 text-living-green mb-4 transition-transform group-hover:scale-110" />
+                  <div className="relative w-16 h-16 mx-auto mb-4">
+                    <Image
+                      src={category.icon}
+                      alt={category.name}
+                      fill
+                      className="object-contain transition-transform group-hover:scale-110"
+                    />
+                  </div>
                   <h3 className="font-body font-semibold text-deep-forest group-hover:text-living-green transition-colors">
                     {category.name}
                   </h3>
@@ -279,6 +289,14 @@ export default function Home() {
                   href={collection.href}
                   className="group block p-10 bg-gradient-to-br from-living-green/5 to-deep-forest/5 hover:from-living-green/10 hover:to-deep-forest/10 transition-all duration-500"
                 >
+                  <div className="relative w-20 h-20 mb-6">
+                    <Image
+                      src={collection.icon}
+                      alt={collection.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <h3 className="font-display text-2xl font-bold text-deep-forest mb-3 group-hover:text-living-green transition-colors">
                     {collection.name}
                   </h3>
@@ -346,10 +364,14 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={0.2}>
-              <div className="aspect-square bg-deep-forest/5 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-living-green/10 to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <MicroscopeIcon className="w-32 h-32 text-deep-forest/20" />
+              <div className="aspect-square bg-deep-forest/5 relative overflow-hidden flex items-center justify-center">
+                <div className="relative w-48 h-48 opacity-30">
+                  <Image
+                    src="/icons/microscope.png"
+                    alt="Microscope"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <p className="absolute bottom-6 left-6 text-sm text-root-brown/50 font-body">
                   Microscopy imagery coming soon
@@ -374,22 +396,23 @@ export default function Home() {
           </ScrollReveal>
 
           <StaggerContainer className="flex flex-wrap justify-center gap-4 md:gap-8 mt-16" staggerDelay={0.1}>
-            {[
-              { name: "Seeds", Icon: SeedIcon, href: "/shop/seeds" },
-              { name: "Living Soil", Icon: SoilIcon, href: "/learn/soil-food-web" },
-              { name: "Composting", Icon: CompostIcon, href: "/shop/composting" },
-              { name: "Testing", Icon: MicroscopeIcon, href: "/shop/tools/soil-testing" },
-              { name: "Tools", Icon: ToolsIcon, href: "/shop/tools" },
-            ].map((item, i) => (
+            {ecosystemItems.map((item, i) => (
               <StaggerItem key={item.name}>
                 <Link
                   href={item.href}
-                  className="group flex flex-col items-center p-8 hover:bg-living-green/20 transition-colors"
+                  className="group flex flex-col items-center p-6 hover:bg-living-green/20 transition-colors"
                 >
-                  <item.Icon className="w-10 h-10 text-mycelium-gold mb-4 group-hover:scale-110 transition-transform" />
+                  <div className="relative w-16 h-16 mb-4 group-hover:scale-110 transition-transform">
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <span className="font-body font-medium text-sm">{item.name}</span>
-                  {i < 4 && (
-                    <span className="hidden md:block absolute -right-4 text-living-green/50 text-2xl">
+                  {i < ecosystemItems.length - 1 && (
+                    <span className="hidden md:block absolute -right-4 text-mycelium-gold/50 text-2xl">
                       →
                     </span>
                   )}
@@ -400,7 +423,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 6: Health & Healing - Clean grid */}
+      {/* Section 6: Health & Healing - Clean grid with icons */}
       <section className="py-24 md:py-40 bg-bone-white">
         <div className="max-w-7xl mx-auto px-4">
           <ScrollReveal>
@@ -428,6 +451,14 @@ export default function Home() {
                   href={topic.href}
                   className="group block p-8 bg-bone-white hover:bg-white transition-colors h-full"
                 >
+                  <div className="relative w-14 h-14 mb-4">
+                    <Image
+                      src={topic.icon}
+                      alt={topic.title}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <h3 className="font-display text-xl font-bold text-deep-forest mb-3 group-hover:text-living-green transition-colors">
                     {topic.title}
                   </h3>
@@ -462,7 +493,14 @@ export default function Home() {
                   href={calc.href}
                   className="group block p-8 bg-bone-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
-                  <calc.Icon className="w-8 h-8 text-mycelium-gold mb-4" />
+                  <div className="relative w-14 h-14 mb-4">
+                    <Image
+                      src={calc.icon}
+                      alt={calc.title}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                   <h3 className="font-body font-semibold text-deep-forest mb-2 group-hover:text-mycelium-gold transition-colors">
                     {calc.title}
                   </h3>
@@ -521,10 +559,14 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={0.2}>
-              <div className="aspect-square bg-deep-forest/5 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tl from-living-green/10 to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <SoilIcon className="w-32 h-32 text-deep-forest/20" />
+              <div className="aspect-square bg-deep-forest/5 relative overflow-hidden flex items-center justify-center">
+                <div className="relative w-48 h-48 opacity-30">
+                  <Image
+                    src="/icons/soil-layers.png"
+                    alt="Soil Layers"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </ScrollReveal>
@@ -557,8 +599,13 @@ export default function Home() {
 
           <ScrollReveal delay={0.6}>
             <div className="flex items-center justify-center gap-4 mt-16">
-              <div className="w-16 h-16 bg-living-green/30 flex items-center justify-center">
-                <LearnIcon className="w-8 h-8 text-mycelium-gold" />
+              <div className="relative w-16 h-16">
+                <Image
+                  src="/icons/book-plant.png"
+                  alt="Jon"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div className="text-left">
                 <p className="font-body font-semibold">Jon</p>
